@@ -7,6 +7,22 @@ const app = express();
 
 const port = process.env.PORT || 3000
 
+let whiteList = [
+    'http://localhost:8888/',
+];
+
+let corsOption = {
+    origin: function(origin, callback) {
+        if (whiteList.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Your Request not Allowed by System'));
+        }
+    }
+}
+
+app.use(cors(corsOption));
+
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(bodyParser.json())
