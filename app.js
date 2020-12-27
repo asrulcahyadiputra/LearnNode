@@ -1,19 +1,22 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const mysql = require('mysql')
-
-const app = express()
+const express = require('express');
+const bodyParser = require('body-parser');
+const mysql = require('mysql');
+const cors = require('cors');
+const app = express();
 
 
 const port = process.env.PORT || 3000
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(bodyParser.json())
 
+app.get('/', (req, res) => {
+    res.json({
+        message: "It Works !"
+    });
+});
 
-// mysql 
-
-
-// Liseten on port or 3000
-app.listen(port, () => console.log(`Listen on port ${port}`))
+app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
+});
